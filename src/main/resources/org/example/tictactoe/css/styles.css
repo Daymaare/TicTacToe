@@ -1,0 +1,11 @@
+.root {
+    -fx-background-color: lightblue;
+}
+
+.green-background{
+    -fx-background-color: green;
+}
+
+.blue-background{
+    -fx-background-color: blue;
+}
