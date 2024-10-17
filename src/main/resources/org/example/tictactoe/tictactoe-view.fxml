@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" fillWidth="false" maxHeight="800" maxWidth="800" minHeight="800" minWidth="800"
+      prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.tictactoe.controller.TicTacToeController">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+    </padding>
+    <BorderPane>
+        <center>
+            <GridPane alignment="CENTER" gridLinesVisible="true">
+
+                <columnConstraints>
+                    <ColumnConstraints/>
+                    <ColumnConstraints/>
+                    <ColumnConstraints/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                </rowConstraints>
+
+                <ImageView onMouseClicked="#image1Clicked">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image2Clicked" GridPane.columnIndex="1">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image3Clicked" GridPane.columnIndex="2">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image4Clicked" GridPane.rowIndex="1">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image5Clicked" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image6Clicked" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image7Clicked" GridPane.rowIndex="2">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image8Clicked" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <ImageView onMouseClicked="#image9Clicked" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <Image url="@Images/Circle.png"/>
+                </ImageView>
+
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                </padding>
+
+            </GridPane>
+        </center>
+
+        <left>
+            <VBox BorderPane.alignment="TOP_CENTER">
+                <Label text="Player 1">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                </Label>
+                <Label text="Score: 0">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                </Label>
+            </VBox>
+        </left>
+
+        <right>
+            <VBox BorderPane.alignment="TOP_CENTER">
+                <Label text="Player 2">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                </Label>
+                <Label text="Score: 0">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                </Label>
+            </VBox>
+        </right>
+
+    </BorderPane>
+</VBox>
