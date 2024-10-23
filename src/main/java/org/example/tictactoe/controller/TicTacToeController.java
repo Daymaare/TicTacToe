@@ -14,30 +14,39 @@ public class TicTacToeController {
     }
 
 
-  public void clickedButton1(MouseEvent mouseEvent) {
-  }
+    public void clickedButton1(MouseEvent mouseEvent) {
 
-  public void clickedButton2(MouseEvent mouseEvent) {
-  }
+    }
 
-  public void clickedButton3(MouseEvent mouseEvent) {
-  }
+    public void clickedButton2(MouseEvent mouseEvent) {
 
-  public void clickedButton4(MouseEvent mouseEvent) {
-  }
+    }
 
-  public void clickedButton5(MouseEvent mouseEvent) {
-  }
+    public void clickedButton3(MouseEvent mouseEvent) {
 
-  public void clickedButton6(MouseEvent mouseEvent) {
-  }
+    }
 
-  public void clickedButton7(MouseEvent mouseEvent) {
-  }
+    public void clickedButton4(MouseEvent mouseEvent) {
 
-  public void clickedButton8(MouseEvent mouseEvent) {
-  }
+    }
 
-  public void clickedButton9(MouseEvent mouseEvent) {
-  }
+    public void clickedButton5(MouseEvent mouseEvent) {
+
+    }
+
+    public void clickedButton6(MouseEvent mouseEvent) {
+
+    }
+
+    public void clickedButton7(MouseEvent mouseEvent) {
+
+    }
+
+    public void clickedButton8(MouseEvent mouseEvent) {
+
+    }
+
+    public void clickedButton9(MouseEvent mouseEvent) {
+
+    }
 }
