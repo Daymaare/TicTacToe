@@ -2,10 +2,10 @@
     -fx-background-color: lightblue;
 }
 
-.green-background{
-    -fx-background-color: green;
-}
+.button{
 
-.blue-background{
-    -fx-background-color: blue;
+    -fx-padding: 0px;
+    -fx-font-size: 90px;
+    -fx-font-family: Arial;
+    -fx-alignment: center;
 }

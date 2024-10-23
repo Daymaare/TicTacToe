@@ -8,5 +8,4 @@ public class Model {
     Image cross;
     Image empty;
 
-
 }
