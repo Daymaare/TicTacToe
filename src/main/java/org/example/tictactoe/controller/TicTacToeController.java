@@ -48,12 +48,15 @@ public class TicTacToeController {
         Button button = (Button) actionEvent.getSource();
 
         playerMove(button);
+        checkWinState();
         computerMove();
+        checkWinState();
     }
 
     private void playerMove(Button button) {
         button.setText("X");
         button.setDisable(true);
+
     }
 
     private void computerMove() {
@@ -81,33 +84,29 @@ public class TicTacToeController {
         }
     }
 
-    public boolean winningStates() {
-        if (button1 == button2 && button2 == button3)
-            return true;
+    public void checkWinState() {
+        for (int a = 0; a < 8; a++) {
+            String line = switch (a) {
+                case 0 -> button1.getText() + button2.getText() + button3.getText();
+                case 1 -> button4.getText() + button5.getText() + button6.getText();
+                case 2 -> button7.getText() + button8.getText() + button9.getText();
+                case 3 -> button1.getText() + button4.getText() + button7.getText();
+                case 4 -> button2.getText() + button5.getText() + button8.getText();
+                case 5 -> button3.getText() + button6.getText() + button9.getText();
+                case 6 -> button1.getText() + button5.getText() + button9.getText();
+                case 7 -> button3.getText() + button5.getText() + button7.getText();
+                default -> null;
+            };
+            if (line.equals("XXX")) {
+                statusLabel.setText("X is the winner!");
+                buttons.forEach(b -> b.setDisable(true));
 
-        if (button4 == button5 && button5 == button6)
-            return true;
-
-        if (button7 == button8 && button8 == button9)
-            return true;
-
-        if (button1 == button4 && button4 == button7)
-            return true;
-
-        if (button2 == button5 && button5 == button8)
-            return true;
-
-        if (button3 == button6 && button6 == button9)
-            return true;
-
-        if (button1 == button5 && button5 == button9)
-            return true;
-
-        if (button3 == button5 && button5 == button7)
-            return true;
-
-        else {
-            return false;
+            } else if (line.equals("OOO")) {
+                statusLabel.setText("O is the winner!");
+                buttons.forEach(b -> b.setDisable(true));
+                return;
+            }
         }
     }
 }
+
