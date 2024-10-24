@@ -2,9 +2,14 @@
     -fx-background-color: lightblue;
 }
 
-.button{
+#Custom-Button {
     -fx-padding: 0px;
     -fx-font-size: 90px;
     -fx-font-family: Arial;
-    -fx-alignment: center;
+}
+
+.Custom-Button {
+    -fx-padding: 0px;
+    -fx-font-size: 90px;
+    -fx-font-family: Arial;
 }
