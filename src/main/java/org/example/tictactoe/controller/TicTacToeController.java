@@ -2,8 +2,10 @@ package org.example.tictactoe.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +47,9 @@ public class TicTacToeController {
         Button button = (Button) actionEvent.getSource();
 
         playerMove(button);
-        computerMove(button);
+        if (!drawState()) {
+            computerMove();
+        }
     }
 
     private void playerMove(Button button) {
@@ -58,14 +62,18 @@ public class TicTacToeController {
 
     }
 
-    private Button computerMove(Button button) {
+    private void computerMove() {
+        Button button;
         var allEnabledButtons = buttons.stream().filter(b -> !b.isDisable()).toList();
-        System.out.println(allEnabledButtons);
         button = allEnabledButtons.get(random.nextInt(allEnabledButtons.size()));
         button.setText("O");
         button.setDisable(true);
 
-        return button;
+    }
+
+    public boolean drawState() {
+        return buttons.stream().allMatch(Node::isDisable);
+
 
     }
 }
