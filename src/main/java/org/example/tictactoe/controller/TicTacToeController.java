@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
-import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -74,6 +73,18 @@ public class TicTacToeController {
     public boolean drawState() {
         return buttons.stream().allMatch(Node::isDisable);
 
+    }
+
+
+    public void reset() {
+        if (drawState()) {
+            buttons.stream().forEach(b -> b.setDisable(false));
+            buttons.stream().forEach(button -> button.setText(""));
+
+        }
+    }
+
+    public void winningState(){
 
     }
 }
