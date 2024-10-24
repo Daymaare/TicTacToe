@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +32,8 @@ public class TicTacToeController {
     public Button button8;
     @FXML
     public Button button9;
-
+    @FXML
+    public Label statusLabel;
     List<Button> buttons;
 
     Random random = new Random();
@@ -46,27 +48,22 @@ public class TicTacToeController {
         Button button = (Button) actionEvent.getSource();
 
         playerMove(button);
-        if (!drawState()) {
-            computerMove();
-        }
+        computerMove();
     }
 
     private void playerMove(Button button) {
-
-        if (!button.getText().isEmpty()) {
-            return;
-        }
         button.setText("X");
         button.setDisable(true);
-
     }
 
     private void computerMove() {
         Button button;
         var allEnabledButtons = buttons.stream().filter(b -> !b.isDisable()).toList();
-        button = allEnabledButtons.get(random.nextInt(allEnabledButtons.size()));
-        button.setText("O");
-        button.setDisable(true);
+        if (!drawState()) {
+            button = allEnabledButtons.get(random.nextInt(allEnabledButtons.size()));
+            button.setText("O");
+            button.setDisable(true);
+        } else statusLabel.setText("It's a tie!");
 
     }
 
@@ -78,13 +75,39 @@ public class TicTacToeController {
 
     public void reset() {
         if (drawState()) {
-            buttons.stream().forEach(b -> b.setDisable(false));
-            buttons.stream().forEach(button -> button.setText(""));
-
+            buttons.forEach(b -> b.setDisable(false));
+            buttons.forEach(button -> button.setText(""));
+            statusLabel.setText("");
         }
     }
 
-    public void winningState(){
+    public boolean winningStates() {
+        if (button1 == button2 && button2 == button3)
+            return true;
 
+        if (button4 == button5 && button5 == button6)
+            return true;
+
+        if (button7 == button8 && button8 == button9)
+            return true;
+
+        if (button1 == button4 && button4 == button7)
+            return true;
+
+        if (button2 == button5 && button5 == button8)
+            return true;
+
+        if (button3 == button6 && button6 == button9)
+            return true;
+
+        if (button1 == button5 && button5 == button9)
+            return true;
+
+        if (button3 == button5 && button5 == button7)
+            return true;
+
+        else {
+            return false;
+        }
     }
 }
