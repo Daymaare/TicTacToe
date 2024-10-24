@@ -5,36 +5,41 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-
 public class TicTacToeController {
 
     @FXML
-    public Button button1;
+    private Button button1;
     @FXML
-    public Button button2;
+    private Button button2;
     @FXML
-    public Button button3;
+    private Button button3;
     @FXML
-    public Button button4;
+    private Button button4;
     @FXML
-    public Button button5;
+    private Button button5;
     @FXML
-    public Button button6;
+    private Button button6;
     @FXML
-    public Button button7;
+    private Button button7;
     @FXML
-    public Button button8;
+    private Button button8;
     @FXML
-    public Button button9;
+    private Button button9;
     @FXML
-    public Label statusLabel;
+    private Label statusLabel;
+    @FXML
+    private Label OScore;
+    @FXML
+    private Label XScore;
+
     List<Button> buttons;
+    int xScore = 1;
+    int oScore = 1;
 
     Random random = new Random();
 
@@ -48,9 +53,13 @@ public class TicTacToeController {
         Button button = (Button) actionEvent.getSource();
 
         playerMove(button);
-        checkWinState();
+
         computerMove();
         checkWinState();
+    }
+
+    public void score(ActionEvent actionEvent) {
+
     }
 
     private void playerMove(Button button) {
@@ -66,6 +75,7 @@ public class TicTacToeController {
             button = allEnabledButtons.get(random.nextInt(allEnabledButtons.size()));
             button.setText("O");
             button.setDisable(true);
+
         } else statusLabel.setText("It's a tie!");
 
     }
@@ -74,7 +84,6 @@ public class TicTacToeController {
         return buttons.stream().allMatch(Node::isDisable);
 
     }
-
 
     public void reset() {
         if (drawState()) {
@@ -100,11 +109,12 @@ public class TicTacToeController {
             if (line.equals("XXX")) {
                 statusLabel.setText("X is the winner!");
                 buttons.forEach(b -> b.setDisable(true));
+                XScore.setText("Score: " + (xScore++));
 
             } else if (line.equals("OOO")) {
                 statusLabel.setText("O is the winner!");
                 buttons.forEach(b -> b.setDisable(true));
-                return;
+                OScore.setText("Score: " + (oScore++));
             }
         }
     }

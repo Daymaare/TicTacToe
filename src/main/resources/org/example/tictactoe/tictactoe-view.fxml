@@ -54,7 +54,7 @@
         </center>
 
         <left>
-            <VBox prefHeight="300.0" prefWidth="110.0" BorderPane.alignment="TOP_CENTER">
+            <VBox prefHeight="300.0" prefWidth="120.0" BorderPane.alignment="TOP_CENTER">
 
                 <Label text="Player X">
                     <font>
@@ -65,7 +65,7 @@
                     </padding>
                 </Label>
 
-                <Label text="Score: 0">
+                <Label fx:id="XScore" text="Score: 0">
                     <font>
                         <Font size="24.0" />
                     </font>
@@ -89,7 +89,7 @@
                     </padding>
                 </Label>
 
-                <Label text="Score: 0">
+                <Label fx:id="OScore" text="Score: 0" >
                     <font>
                         <Font size="24.0" />
                     </font>
