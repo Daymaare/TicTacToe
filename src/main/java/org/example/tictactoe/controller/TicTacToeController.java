@@ -55,11 +55,7 @@ public class TicTacToeController {
         playerMove(button);
 
         computerMove();
-        checkWinState();
-    }
-
-    public void score(ActionEvent actionEvent) {
-
+        winStates();
     }
 
     private void playerMove(Button button) {
@@ -93,7 +89,7 @@ public class TicTacToeController {
         }
     }
 
-    public void checkWinState() {
+    public void winStates() {
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -106,16 +102,20 @@ public class TicTacToeController {
                 case 7 -> button3.getText() + button5.getText() + button7.getText();
                 default -> null;
             };
-            if (line.equals("XXX")) {
-                statusLabel.setText("X is the winner!");
-                buttons.forEach(b -> b.setDisable(true));
-                XScore.setText("Score: " + (xScore++));
+            winnerIs(line);
+        }
+    }
 
-            } else if (line.equals("OOO")) {
-                statusLabel.setText("O is the winner!");
-                buttons.forEach(b -> b.setDisable(true));
-                OScore.setText("Score: " + (oScore++));
-            }
+    private void winnerIs(String line) {
+        if (line.equals("XXX")) {
+            statusLabel.setText("X is the winner!");
+            buttons.forEach(b -> b.setDisable(true));
+            XScore.setText("Score: " + (xScore++));
+
+        } else if (line.equals("OOO")) {
+            statusLabel.setText("O is the winner!");
+            buttons.forEach(b -> b.setDisable(true));
+            OScore.setText("Score: " + (oScore++));
         }
     }
 }
