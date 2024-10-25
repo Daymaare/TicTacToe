@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,8 +40,8 @@ public class TicTacToeController {
     private Label XScore;
 
     List<Button> buttons;
-    int xScore = 1;
-    int oScore = 1;
+    int xScore = 0;
+    int oScore = 0;
 
     Random random = new Random();
 
@@ -51,45 +53,53 @@ public class TicTacToeController {
     @FXML
     private void clickedButton(ActionEvent actionEvent) {
         Button button = (Button) actionEvent.getSource();
-
         playerMove(button);
-
         computerMove();
-        winStates();
     }
 
     private void playerMove(Button button) {
+        if (button.isDisable() || winStates()) return;
+
         button.setText("X");
         button.setDisable(true);
-
+        button.setTextFill(Color.RED);
     }
 
     private void computerMove() {
-        Button button;
+        if (winStates() || allButtonsDisabled()) return;
+
         var allEnabledButtons = buttons.stream().filter(b -> !b.isDisable()).toList();
-        if (!drawState()) {
-            button = allEnabledButtons.get(random.nextInt(allEnabledButtons.size()));
-            button.setText("O");
-            button.setDisable(true);
+        if (allEnabledButtons.isEmpty()) return;
 
-        } else statusLabel.setText("It's a tie!");
+        Button button = allEnabledButtons.get(random.nextInt(allEnabledButtons.size()));
+        button.setText("O");
+        button.setDisable(true);
+        button.setTextFill(Color.BLUE);
 
+        winStates();
     }
 
-    public boolean drawState() {
-        return buttons.stream().allMatch(Node::isDisable);
+    private void disableAllButtons() {
+        buttons.forEach(b -> b.setDisable(true));
+    }
 
+    public boolean allButtonsDisabled() {
+        boolean allDisabled = buttons.stream().allMatch(Node::isDisable);
+        if (allDisabled && !winStates()) {
+            statusLabel.setText("Draw!");
+        }
+        return allDisabled;
     }
 
     public void reset() {
-        if (drawState()) {
-            buttons.forEach(b -> b.setDisable(false));
-            buttons.forEach(button -> button.setText(""));
-            statusLabel.setText("");
-        }
+        buttons.forEach(b -> {
+            b.setDisable(false);
+            b.setText("");
+        });
+        statusLabel.setText("");
     }
 
-    public void winStates() {
+    public boolean winStates() {
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
                 case 0 -> button1.getText() + button2.getText() + button3.getText();
@@ -102,21 +112,35 @@ public class TicTacToeController {
                 case 7 -> button3.getText() + button5.getText() + button7.getText();
                 default -> null;
             };
-            winnerIs(line);
+
+            if (winnerIs(line)) {
+                return true;
+            }
         }
+        return false;
     }
 
-    private void winnerIs(String line) {
+    private boolean winnerIs(String line) {
         if (line.equals("XXX")) {
             statusLabel.setText("X is the winner!");
-            buttons.forEach(b -> b.setDisable(true));
-            XScore.setText("Score: " + (xScore++));
+            disableAllButtons();
+            updateScore("X");
 
+            return true;
         } else if (line.equals("OOO")) {
             statusLabel.setText("O is the winner!");
-            buttons.forEach(b -> b.setDisable(true));
-            OScore.setText("Score: " + (oScore++));
+            disableAllButtons();
+            updateScore("O");
+            return true;
+        }
+        return false;
+    }
+
+    private void updateScore(String player) {
+        if (player.equals("X")) {
+            XScore.setText("Score: " + (++xScore));
+        } else if (player.equals("O")) {
+            OScore.setText("Score: " + (++oScore));
         }
     }
 }
-

@@ -78,7 +78,7 @@
         </left>
 
         <right>
-            <VBox prefWidth="110.0" BorderPane.alignment="TOP_CENTER">
+            <VBox prefWidth="120.0" BorderPane.alignment="TOP_CENTER">
 
                 <Label text="Player O">
                     <font>
