@@ -17,7 +17,7 @@ public class Model {
     }
 
     public void playerMove(Button button) {
-        if (button.isDisable() || winStates()) return;
+        if (button.isDisable() || winStates() != null) return;  // Check for winner
 
         button.setText("X");
         button.setDisable(true);
@@ -25,7 +25,7 @@ public class Model {
     }
 
     public void computerMove() {
-        if (winStates() || allButtonsDisabled()) return;
+        if (winStates() != null || allButtonsDisabled()) return;  // Check for winner
 
         var allEnabledButtons = buttons.stream().filter(b -> !b.isDisable()).toList();
         if (allEnabledButtons.isEmpty()) return;
@@ -37,8 +37,7 @@ public class Model {
     }
 
     public boolean allButtonsDisabled() {
-        boolean allDisabled = buttons.stream().allMatch(Button::isDisable);
-        return allDisabled;
+        return buttons.stream().allMatch(Button::isDisable);
     }
 
     public void reset() {
@@ -48,7 +47,7 @@ public class Model {
         });
     }
 
-    public boolean winStates() {
+    public String winStates() {  // Changed to return the winner
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
                 case 0 -> buttons.get(0).getText() + buttons.get(1).getText() + buttons.get(2).getText();
@@ -62,24 +61,25 @@ public class Model {
                 default -> null;
             };
 
-            if (winnerIs(line)) {
-                return true;
+            String winner = winnerIs(line); // Get winner
+            if (winner != null) {
+                return winner; // Return winner
             }
         }
-        return false;
+        return null; // No winner
     }
 
-    private boolean winnerIs(String line) {
+    private String winnerIs(String line) { // Changed to return a String
         if (line.equals("XXX")) {
             updateScore("X");
             disableAllButtons();
-            return true;
+            return "X"; // Return "X" if player X wins
         } else if (line.equals("OOO")) {
             updateScore("O");
             disableAllButtons();
-            return true;
+            return "O"; // Return "O" if player O wins
         }
-        return false;
+        return null; // No winner
     }
 
     private void updateScore(String player) {
