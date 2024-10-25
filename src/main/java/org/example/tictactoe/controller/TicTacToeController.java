@@ -50,11 +50,10 @@ public class TicTacToeController {
         Button button = (Button) actionEvent.getSource();
         model.playerMove(button);
 
-        // Check for a win after player's move
-        String winner = model.winStates(); // Get the winner
-        if (winner == null) { // If there's no winner, computer can move
+        String winner = model.winStates();
+        if (winner == null) {
             model.computerMove();
-            winner = model.winStates(); // Check for a win after computer's move
+            winner = model.winStates();
         }
         updateScores(winner);
     }
@@ -64,7 +63,7 @@ public class TicTacToeController {
         OScore.setText("Score: " + model.getOScore());
 
         if (winner != null) {
-            statusLabel.setText(winner + " wins!"); // Update status label with the winner
+            statusLabel.setText(winner + " wins!");
         } else if (model.allButtonsDisabled()) {
             statusLabel.setText("Draw!");
         }
@@ -73,6 +72,6 @@ public class TicTacToeController {
     public void reset() {
         model.reset();
         statusLabel.setText("");
-        updateScores(null); // Reset scores without a winner
+        updateScores(null);
     }
 }
