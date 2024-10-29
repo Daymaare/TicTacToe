@@ -13,3 +13,7 @@
     -fx-font-size: 90px;
     -fx-font-family: Arial;
 }
+
+.grid-pane {
+    -fx-background-color: gray;
+}
