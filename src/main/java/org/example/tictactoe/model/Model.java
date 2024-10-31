@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Random;
 
 public class Model {
-    private List<Button> buttons;
+    private final List<Button> BUTTONS;
     private int xScore = 0;
     private int oScore = 0;
-    private Random random = new Random();
+    private final Random RANDOM = new Random();
 
     public Model(List<Button> buttons) {
-        this.buttons = buttons;
+        this.BUTTONS = buttons;
     }
 
     public void playerMove(Button button) {
@@ -27,21 +27,21 @@ public class Model {
     public void computerMove() {
         if (winStates() != null || allButtonsDisabled()) return;
 
-        var allEnabledButtons = buttons.stream().filter(b -> !b.isDisable()).toList();
+        var allEnabledButtons = BUTTONS.stream().filter(b -> !b.isDisable()).toList();
         if (allEnabledButtons.isEmpty()) return;
 
-        Button button = allEnabledButtons.get(random.nextInt(allEnabledButtons.size()));
+        Button button = allEnabledButtons.get(RANDOM.nextInt(allEnabledButtons.size()));
         button.setText("O");
         button.setDisable(true);
         button.setTextFill(Color.BLUE);
     }
 
     public boolean allButtonsDisabled() {
-        return buttons.stream().allMatch(Button::isDisable);
+        return BUTTONS.stream().allMatch(Button::isDisable);
     }
 
     public void reset() {
-        buttons.forEach(b -> {
+        BUTTONS.forEach(b -> {
             b.setDisable(false);
             b.setText("");
         });
@@ -50,14 +50,14 @@ public class Model {
     public String winStates() {
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
-                case 0 -> buttons.get(0).getText() + buttons.get(1).getText() + buttons.get(2).getText();
-                case 1 -> buttons.get(3).getText() + buttons.get(4).getText() + buttons.get(5).getText();
-                case 2 -> buttons.get(6).getText() + buttons.get(7).getText() + buttons.get(8).getText();
-                case 3 -> buttons.get(0).getText() + buttons.get(3).getText() + buttons.get(6).getText();
-                case 4 -> buttons.get(1).getText() + buttons.get(4).getText() + buttons.get(7).getText();
-                case 5 -> buttons.get(2).getText() + buttons.get(5).getText() + buttons.get(8).getText();
-                case 6 -> buttons.get(0).getText() + buttons.get(4).getText() + buttons.get(8).getText();
-                case 7 -> buttons.get(2).getText() + buttons.get(4).getText() + buttons.get(6).getText();
+                case 0 -> BUTTONS.get(0).getText() + BUTTONS.get(1).getText() + BUTTONS.get(2).getText();
+                case 1 -> BUTTONS.get(3).getText() + BUTTONS.get(4).getText() + BUTTONS.get(5).getText();
+                case 2 -> BUTTONS.get(6).getText() + BUTTONS.get(7).getText() + BUTTONS.get(8).getText();
+                case 3 -> BUTTONS.get(0).getText() + BUTTONS.get(3).getText() + BUTTONS.get(6).getText();
+                case 4 -> BUTTONS.get(1).getText() + BUTTONS.get(4).getText() + BUTTONS.get(7).getText();
+                case 5 -> BUTTONS.get(2).getText() + BUTTONS.get(5).getText() + BUTTONS.get(8).getText();
+                case 6 -> BUTTONS.get(0).getText() + BUTTONS.get(4).getText() + BUTTONS.get(8).getText();
+                case 7 -> BUTTONS.get(2).getText() + BUTTONS.get(4).getText() + BUTTONS.get(6).getText();
                 default -> null;
             };
 
@@ -91,7 +91,7 @@ public class Model {
     }
 
     private void disableAllButtons() {
-        buttons.forEach(b -> b.setDisable(true));
+        BUTTONS.forEach(b -> b.setDisable(true));
     }
 
     public int getXScore() {
